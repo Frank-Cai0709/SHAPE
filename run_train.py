@@ -386,8 +386,8 @@ def train_test_cbm_and_save(args):
     hdcm_feature_dim_before = train_c.shape[1]
     hdcm_hyperedge_feature_dim = 0
     logger.info(f"Feature dim after SDCM: {sdcm_feature_dim_after}")
-    logger.info(f"HDCM enabled: {args.use_hdcm}")
-    logger.info(f"Feature dim before HDCM: {hdcm_feature_dim_before}")
+    logger.info(f"DCR enabled: {args.use_hdcm}")
+    logger.info(f"Feature dim before DCR: {hdcm_feature_dim_before}")
     if args.use_hdcm:
         hdcm = HypergraphDiagnosticCueModule(
             hyperedge_size=args.hyperedge_size,
@@ -470,11 +470,11 @@ def train_test_cbm_and_save(args):
             class_to_hyperedge_count[edge.class_name] += 1
         for class_name in classes:
             logger.info(
-                f"HDCM hyperedges for {class_name}: {class_to_hyperedge_count[class_name]}"
+                f"DCR hyperedges for {class_name}: {class_to_hyperedge_count[class_name]}"
             )
-        logger.info(f"HDCM hyperedge size: {args.hyperedge_size}")
-        logger.info(f"HDCM synergy weight: {args.hyperedge_synergy_weight}")
-        logger.info(f"HDCM hyperedge feature dim: {hdcm_hyperedge_feature_dim}")
+        logger.info(f"DCR hyperedge size: {args.hyperedge_size}")
+        logger.info(f"DCR synergy weight: {args.hyperedge_synergy_weight}")
+        logger.info(f"DCR hyperedge feature dim: {hdcm_hyperedge_feature_dim}")
 
         if args.save_hypergraph_structures:
             hypergraph_paths = hdcm.save(
@@ -485,11 +485,11 @@ def train_test_cbm_and_save(args):
                     "test": test_hyperedges,
                 },
             )
-            logger.info(f"HDCM hypergraph json: {hypergraph_paths['json']}")
-            logger.info(f"HDCM hypergraph csv: {hypergraph_paths['csv']}")
-            logger.info(f"HDCM top activated hyperedges csv: {hypergraph_paths['sample_top_csv']}")
+            logger.info(f"DCR hypergraph json: {hypergraph_paths['json']}")
+            logger.info(f"DCR hypergraph csv: {hypergraph_paths['csv']}")
+            logger.info(f"DCR top activated hyperedges csv: {hypergraph_paths['sample_top_csv']}")
 
-    logger.info(f"Feature dim after HDCM: {train_c.shape[1]}")
+    logger.info(f"Feature dim after DCR: {train_c.shape[1]}")
     logger.info(f"Classifier input dim: {train_c.shape[1]}")
 
     if args.use_dedm:
@@ -824,13 +824,13 @@ if __name__ == "__main__":
     parser.add_argument("--dedm_uncertainty_weight", type=float, default=0.01, help="Weight for DEDM uncertainty regularization")
     parser.add_argument("--dedm_kl_weight", type=float, default=0.0, help="Weight for uncertainty-gated KL from concept Dirichlet evidence to a uniform prior")
     parser.add_argument("--use_hdcm", action="store_true", help="Enable Hypergraph Diagnostic Cue Modeling")
-    parser.add_argument("--hyperedge_size", type=int, default=3, choices=[2, 3, 4], help="Number of concepts in mined HDCM hyperedges")
-    parser.add_argument("--top_hyperedges_per_class", type=int, default=5, help="Top HDCM hyperedges to keep per class")
+    parser.add_argument("--hyperedge_size", type=int, default=3, choices=[2, 3, 4], help="Number of concepts in mined DCR hyperedges")
+    parser.add_argument("--top_hyperedges_per_class", type=int, default=5, help="Top DCR hyperedges to keep per class")
     parser.add_argument("--hyperedge_activation_type", type=str, default="product", choices=["product", "min", "mean", "noisy_and"], help="How to compute hyperedge activations")
     parser.add_argument("--hyperedge_binarize_threshold", type=float, default=0.5, help="Threshold for mining active concepts into hyperedges")
-    parser.add_argument("--hyperedge_synergy_weight", type=float, default=1.0, help="Weight for synergy-aware HDCM scoring: score = discriminativeness + weight * synergy")
+    parser.add_argument("--hyperedge_synergy_weight", type=float, default=1.0, help="Weight for synergy-aware DCR scoring: score = discriminativeness + weight * synergy")
     parser.add_argument("--use_hypergraph_message_passing", action="store_true", help="Append one-step hypergraph propagated concept features")
-    parser.add_argument("--save_hypergraph_structures", action="store_true", help="Save HDCM hypergraph structures and top activated hyperedges")
+    parser.add_argument("--save_hypergraph_structures", action="store_true", help="Save DCR hypergraph structures and top activated hyperedges")
 
 
     config_parser = argparse.ArgumentParser(add_help=False)
