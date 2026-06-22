@@ -1,0 +1,5 @@
+NoDR
+MildNPDR
+ModerateNPDR
+SevereNPDR
+PDR
