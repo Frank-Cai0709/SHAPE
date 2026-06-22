@@ -62,7 +62,7 @@ class HypergraphDiagnosticCueModule:
         use_hypergraph_message_passing: bool = False,
     ):
         if hyperedge_size not in {2, 3, 4}:
-            raise ValueError("HDCM supports hyperedge_size 2, 3, or 4.")
+            raise ValueError("DCR supports hyperedge_size 2, 3, or 4.")
         if hyperedge_activation_type not in {"product", "min", "mean", "noisy_and"}:
             raise ValueError(
                 "hyperedge_activation_type must be one of: product, min, mean, noisy_and."
