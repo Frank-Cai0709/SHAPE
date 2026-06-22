@@ -8,7 +8,7 @@ Concept bottleneck models (CBMs) provide an interpretable framework for medical 
   <img src="main figure.png" width="900">
 </p>
 
-## Included modules
+## Codebase Structure
 
 - `run_train.py`: main training entry
 - `scripts/discover_concepts.py`: concept discovery for **Distribution-Aware Concept Discovery (DACD)**
@@ -24,7 +24,7 @@ Concept bottleneck models (CBMs) provide an interpretable framework for medical 
 - `requirements.txt`: package requirements
 
 
-## Core pipeline
+## Main Components
 
 SHAPE contains three main components:
 
