@@ -23,15 +23,6 @@ Concept bottleneck models (CBMs) provide an interpretable framework for medical 
 - `data/classes_name/`: dataset class-name files
 - `requirements.txt`: package requirements
 
-## Excluded contents
-
-This release intentionally excludes:
-
-- baseline implementations
-- ablation-only scripts
-- plotting and analysis utilities
-- checkpoints and saved outputs
-- temporary experiment files
 
 ## Core pipeline
 
